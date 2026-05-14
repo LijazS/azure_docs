@@ -1,0 +1,2 @@
+Create an rg, 1 vnet with ip range 10.0.0.0/16 , 2 subnets - 1 public ( 10.0.1.0/24 ), 1 private ( 10.0.2.0/24 ).
+- inside the private subnet make a vm and deploy ur application there
