@@ -53,16 +53,25 @@ etc ....
 
 ## Desgn
 
-'''
-VNet-A (10.0.0.0/16)
-      |
-      | UDR -> Hub Firewall Private IP
-      |
-Hub VNet-B (11.0.0.0/16)
-AzureFirewallSubnet
-Azure Firewall
-      |
-      | UDR -> Hub Firewall Private IP
-      |
-VNet-C (12.0.0.0/16)
-'''
+```
+VM-A sends packet to 12.0.0.5
+   ↓
+Route Table says:
+Send to Firewall (11.0.0.4)
+   ↓
+Firewall receives packet
+   ↓
+Checks:
+- Source IP?
+- Destination IP?
+- Port?
+- Protocol?
+- Rule match?
+   ↓
+Allowed?
+   ↓ Yes
+Forward
+   ↓
+VM-C
+
+```
