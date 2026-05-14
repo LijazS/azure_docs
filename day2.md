@@ -25,7 +25,7 @@ A way of privately connecting two Virtual Networks in Azure.
 
 ### Traffic Flow Diagram
 
-```
+``` 
 VM-A (wants to reach DB in VNet B)
   ↓
 VM checks destination IP
