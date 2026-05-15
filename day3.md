@@ -75,3 +75,5 @@ Forward
 VM-C
 
 ```
+
+Notes :- Route tables apply to traffic ORIGINATING FROM resources inside that subnet
