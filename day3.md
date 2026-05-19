@@ -77,3 +77,55 @@ VM-C
 ```
 
 Notes :- Route tables apply to traffic ORIGINATING FROM resources inside that subnet
+
+
+
+
+IF USING NVA VM
+
+1. enable forwarding in the NIC
+
+2. sudo nano /etc/sysctl.conf
+
+Uncomment/add:
+
+net.ipv4.ip_forward=1
+
+Apply:
+
+sudo sysctl -p
+
+cat /proc/sys/net/ipv4/ip_forward   
+
+should return 1
+
+3. Optional static routes:
+
+sudo ip route add 10.0.0.0/16 via 13.0.1.1
+sudo ip route add 11.0.0.0/16 via 13.0.1.1
+sudo ip route add 12.0.0.0/16 via 13.0.1.1
+
+
+4. add iptables  
+
+sudo iptables -P FORWARD ACCEPT
+<!-- sudo iptables -A FORWARD -s 10.0.0.0/16 -j ACCEPT
+sudo iptables -A FORWARD -s 11.0.0.0/16 -j ACCEPT
+sudo iptables -A FORWARD -s 12.0.0.0/16 -j ACCEPT
+sudo iptables -A FORWARD -d 10.0.0.0/16 -j ACCEPT
+sudo iptables -A FORWARD -d 11.0.0.0/16 -j ACCEPT -->
+sudo                                                            
+
+More Secure Version:
+
+sudo iptables -P FORWARD DROP
+
+sudo iptables -A FORWARD \
+  -s 10.0.0.0/16 \
+  -d 11.0.0.0/16 \
+  -j ACCEPT
+
+sudo iptables -A FORWARD \
+  -s 11.0.0.0/16 \
+  -d 10.0.0.0/16 \
+  -j ACCEPT
